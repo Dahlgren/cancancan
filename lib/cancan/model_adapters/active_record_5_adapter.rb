@@ -43,10 +43,7 @@ module CanCan
 
           conditions = predicate_builder.resolve_column_aliases(conditions)
           conditions = @model_class.send(:expand_hash_conditions_for_aggregates, conditions)
-
           conditions.stringify_keys!
-
-          conditions, binds = predicate_builder.create_binds(conditions)
 
           predicate_builder.build_from_hash(conditions).map { |b|
             @model_class.send(:connection).visitor.compile b
